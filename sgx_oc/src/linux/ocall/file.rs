@@ -16,9 +16,9 @@
 // under the License..
 
 use super::*;
+use core::ffi::CStr;
 use core::ptr;
 use core::slice;
-use sgx_ffi::c_str::CStr;
 
 pub unsafe fn open(path: &CStr, flags: c_int) -> OCallResult<c_int> {
     let mut result: c_int = 0;

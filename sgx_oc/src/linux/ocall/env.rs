@@ -17,11 +17,12 @@
 
 use super::*;
 use alloc::boxed::Box;
+use alloc::ffi::CString;
 use alloc::vec::Vec;
+use core::ffi::CStr;
 use core::mem::{self, ManuallyDrop};
 use core::ptr;
 use core::sync::atomic::{AtomicPtr, Ordering};
-use sgx_ffi::c_str::{CStr, CString};
 use sgx_ffi::memchr;
 use sgx_sync::StaticRwLock;
 use sgx_trts::trts::{is_within_enclave, EnclaveRange};

@@ -18,11 +18,11 @@
 use crate::linux::*;
 use alloc::boxed::Box;
 use alloc::vec::Vec;
+use core::ffi::CStr;
 use core::mem;
 use core::mem::ManuallyDrop;
 use core::ptr;
 use core::slice;
-use sgx_ffi::c_str::CStr;
 use sgx_oc::linux::ocall;
 use sgx_oc::linux::ocall::{AddrInfoHints, OCallError};
 use sgx_trts::trts::is_within_enclave;

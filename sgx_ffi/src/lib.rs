@@ -22,7 +22,7 @@
 #![allow(incomplete_features)]
 #![feature(rustc_attrs)]
 #![feature(specialization)]
-#![feature(toowned_clone_into)]
+// #![feature(toowned_clone_into)]
 #![feature(vec_into_raw_parts)]
 #![cfg_attr(feature = "unit_test", allow(clippy::useless_format))]
 
@@ -33,5 +33,5 @@ extern crate alloc;
 extern crate sgx_types;
 
 pub mod ascii;
-pub mod c_str;
+// pub mod c_str;
 pub mod memchr;

@@ -17,7 +17,7 @@
 
 use crate::linux::*;
 use core::ptr;
-use sgx_ffi::c_str::CStr;
+use core::ffi::CStr;
 use sgx_oc::linux::ocall;
 use sgx_trts::trts::is_within_enclave;
 

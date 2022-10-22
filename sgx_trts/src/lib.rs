@@ -30,14 +30,12 @@
 #![feature(once_cell)]
 #![feature(ptr_internals)]
 #![feature(thread_local)]
-#![feature(untagged_unions)]
 #![cfg_attr(feature = "sim", feature(unchecked_math))]
 #![allow(clippy::enum_variant_names)]
 #![allow(clippy::missing_safety_doc)]
 #![allow(clippy::upper_case_acronyms)]
 #![allow(dead_code)]
 #![allow(non_camel_case_types)]
-#![allow(unaligned_references)]
 
 #[cfg(all(feature = "sim", feature = "hyper"))]
 compile_error!("feature \"sim\" and feature \"hyper\" cannot be enabled at the same time");

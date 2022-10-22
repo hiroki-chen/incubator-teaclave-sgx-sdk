@@ -232,7 +232,17 @@ extern "C" fn internal_handle(info: &mut ExceptionInfo) {
             error::abort();
         }
 
-        let mut handlers: [ExceptionHandler; MAX_REGISTER_COUNT] = unsafe { mem::zeroed() };
+        // The compiler, in general, assumes that a variable is properly initialized according to the requirements of the variable’s type. For example, a
+        // variable of reference type must be aligned and non-null. This is an invariant that must always be upheld, even in unsafe code. As a consequence,
+        // zero-initializing a variable of reference type causes instantaneous undefined behavior, no matter whether that reference ever gets used to access
+        // memory:
+        //
+        // let mut handlers: [ExceptionHandler; MAX_REGISTER_COUNT] = unsafe { mem::zeroed(); }
+
+        // We guarantee that the following pointer is ALWAYS valid.
+        let handlers = mem::MaybeUninit::<[ExceptionHandler; MAX_REGISTER_COUNT]>::uninit();
+        let mut handlers = unsafe { handlers.assume_init() };
+
         let mut len = 0_usize;
         for (i, f) in list_guard.iter().enumerate().take(MAX_REGISTER_COUNT) {
             handlers[i] = f;

@@ -19,14 +19,16 @@ use crate::alloc::borrow::ToOwned;
 use crate::linux::x86_64::*;
 use alloc::str;
 use alloc::string::String;
+use alloc::ffi::CString;
 use alloc::vec::Vec;
 use core::convert::From;
+use core::ffi::CStr;
 use core::fmt;
 use core::num::NonZeroUsize;
 use core::ptr;
 use core::slice;
 use core::slice::SliceIndex;
-use sgx_ffi::c_str::{CStr, CString};
+
 use sgx_ffi::memchr;
 use sgx_trts::trts::enclave_mode;
 use sgx_trts::trts::{EnclaveRange, OcBuffer};

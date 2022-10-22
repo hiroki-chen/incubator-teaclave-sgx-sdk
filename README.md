@@ -9,7 +9,7 @@ compared to v1.1.
 - Improved testing framework. `sgx_tstd` is well tested now.
 - No need to maintain 100+ 3rd party dependencies. Most dependencies are `use`-able without any change.
 
-Note that this is a detached 2.0.0 version of teaclave-sgx-sdk that is tailored **only** to PoBF confidential computing framework. The nightly Rust toolchain is updated to a relatively new version and the allocators were modified to ensure all sensitive data are erased after they are deallocated.
+Note that this is a detached 2.0.0 version of teaclave-sgx-sdk that is tailored **only** to PoBF confidential computing framework. The nightly Rust toolchain was updated to a relatively new version (nightly-2022-08-30) and the allocators were modified to ensure all sensitive data are erased after they are deallocated. We do not ensure that the `sgx_std` crate supports this toolchain version.
 
 ## Build system
 

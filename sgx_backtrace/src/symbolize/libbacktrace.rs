@@ -43,9 +43,9 @@
 
 use crate::backtrace::uw;
 use crate::bt;
+use alloc::ffi::CString;
 use core::{marker, ptr, slice};
 use libc::{c_char, c_int, c_void, uintptr_t};
-use sgx_ffi::c_str::CString;
 use sgx_trts::sync::SpinMutex;
 use sgx_trts::trts::MmLayout;
 

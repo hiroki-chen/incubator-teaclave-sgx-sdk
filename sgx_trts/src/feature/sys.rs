@@ -84,8 +84,11 @@ impl SystemFeatures {
             if (self.system_feature_set[0] & (1_u64 << SystemFeatures::SYS_FEATURE_EXTEND)) != 0 {
                 cmp::min(self.size, mem::size_of::<Self>())
             } else {
-                let b = self as *const _ as usize;
-                let p = &self.size as *const _ as usize;
+                // To avoid misaligned fields, we replace the reference with a raw pointer and use `read_unaligned`/`write_unaligned`.
+                let p_b = core::ptr::addr_of!(self);
+                let p_p = core::ptr::addr_of!(self.size);
+                let b = p_b.read_unaligned() as *const _ as usize;
+                let p = p_p.read_unaligned();
                 p - b
             };
 

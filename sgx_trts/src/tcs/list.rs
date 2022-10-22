@@ -20,7 +20,7 @@ use crate::rand::Rng;
 use crate::sync::SpinMutex;
 use alloc::collections::linked_list::{Iter, LinkedList};
 use core::fmt;
-use core::lazy::OnceCell;
+use core::cell::OnceCell;
 use core::num::NonZeroUsize;
 use core::ptr::NonNull;
 

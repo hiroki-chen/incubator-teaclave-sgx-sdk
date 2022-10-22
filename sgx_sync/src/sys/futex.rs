@@ -179,7 +179,7 @@ impl Futex {
     }
 
     fn load_val(&self) -> i32 {
-        unsafe { intrinsics::atomic_load(self.0 as *const i32) }
+        unsafe { intrinsics::atomic_load_relaxed(self.0 as *const i32) }
     }
 
     fn addr(&self) -> usize {

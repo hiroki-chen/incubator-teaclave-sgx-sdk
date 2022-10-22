@@ -77,8 +77,12 @@ pub fn lock_state() -> State {
     const IN_PROGRESS: u32 = 1;
 
     let state = unsafe {
-        let (state, _) =
-            core::intrinsics::atomic_cxchg(&mut ENCLAVE_STATE, NOT_STARTED, IN_PROGRESS);
+        // No ordering constraints, only atomic operations.
+        let (state, _) = core::intrinsics::atomic_cxchg_relaxed_relaxed(
+            &mut ENCLAVE_STATE,
+            NOT_STARTED,
+            IN_PROGRESS,
+        );
         state
     };
     match state {

@@ -21,7 +21,7 @@ use crate::error;
 use crate::feature::SysFeatures;
 use crate::rand::Rng;
 use core::convert::From;
-use core::lazy::OnceCell;
+use core::cell::OnceCell;
 use core::mem;
 use core::num::NonZeroUsize;
 use core::ptr;
