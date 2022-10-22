@@ -1,4 +1,4 @@
-# Teaclave SGX SDK v2.0 preview
+# Teaclave SGX SDK v2.0 preview (PoBF specific version)
 
 Teaclave SGX SDK v2.0 is a revamped version. It is much more developer friendly
 compared to v1.1.
@@ -8,6 +8,8 @@ compared to v1.1.
 - Refactored Intel's SDK using Rust. Only a small portion of Intel's SDK is required.
 - Improved testing framework. `sgx_tstd` is well tested now.
 - No need to maintain 100+ 3rd party dependencies. Most dependencies are `use`-able without any change.
+
+Note that this is a detached 2.0.0 version of teaclave-sgx-sdk that is tailored **only** to PoBF confidential computing framework. The nightly Rust toolchain is updated to a relatively new version and the allocators were modified to ensure all sensitive data are erased after they are deallocated.
 
 ## Build system
 
