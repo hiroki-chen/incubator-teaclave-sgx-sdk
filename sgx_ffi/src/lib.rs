@@ -33,5 +33,7 @@ extern crate alloc;
 extern crate sgx_types;
 
 pub mod ascii;
-// pub mod c_str;
+// This module is replaced by `core::ffi::CStr` and `alloc::ffi::CString`.
+#[cfg(feature = "use_sgx_c_str")]
+pub mod c_str;
 pub mod memchr;
