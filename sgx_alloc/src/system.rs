@@ -19,7 +19,7 @@
 
 use core::alloc::{AllocError, Allocator, GlobalAlloc, Layout};
 use core::intrinsics;
-use core::ptr::{self, NonNull};
+use core::ptr::{self, NonNull, write_bytes};
 
 // The minimum alignment guaranteed by the architecture. This value is used to
 // add fast paths for low alignment values. In practice, the alignment is a
@@ -115,6 +115,8 @@ unsafe impl Allocator for System {
     #[inline]
     unsafe fn deallocate(&self, ptr: NonNull<u8>, layout: Layout) {
         if layout.size() != 0 {
+            // Clear previous allocated memory space.
+            write_bytes(ptr.as_ptr(), 0, layout.size());
             // SAFETY: `layout` is non-zero in size,
             // other conditions must be upheld by the caller
             GlobalAlloc::dealloc(self, ptr.as_ptr(), layout)
@@ -218,6 +220,7 @@ mod platform {
     use core::alloc::{GlobalAlloc, Layout};
     use core::ffi::c_void;
     use core::ptr;
+    use core::ptr::write_bytes;
 
     unsafe impl GlobalAlloc for System {
         #[inline]
@@ -227,6 +230,14 @@ mod platform {
             } else {
                 aligned_malloc(&layout)
             }
+        }
+
+        #[inline]
+        unsafe fn dealloc(&self, ptr: *mut u8, _layout: Layout) {
+            // Modified global allocator: ensure all the heap memory is fully cleared.
+            write_bytes(ptr, 0, _layout.size());
+
+            libc::free(ptr as *mut c_void)
         }
 
         #[inline]
@@ -240,11 +251,6 @@ mod platform {
                 }
                 ptr
             }
-        }
-
-        #[inline]
-        unsafe fn dealloc(&self, ptr: *mut u8, _layout: Layout) {
-            libc::free(ptr as *mut c_void)
         }
 
         #[inline]
