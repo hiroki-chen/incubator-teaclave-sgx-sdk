@@ -15,7 +15,8 @@
 // specific language governing permissions and limitations
 // under the License..
 
-mod generic;
 mod futex;
+pub use futex::Parker;
 
-pub use generic::Parker;
+// mod generic;
+// pub use generic::Parker;

@@ -51,11 +51,15 @@ pub fn futex_wait(futex: &AtomicU32, expected: u32, timeout: Option<Duration>) -
 /// On some platforms, this always returns false.
 pub fn futex_wake(futex: &AtomicU32) -> bool {
     let futex = Futex::new(futex);
-    futex.wake(1).is_ok()
+    match futex.wake(1) {
+        Ok(0) => false,
+        Ok(_) => true,
+        Err(_) => false,
+    }
 }
 
 /// Wake up all threads that are waiting on futex_wait on this futex.
-pub fn futex_wake_all(futex: &AtomicU32) -> bool {
+pub fn futex_wake_all(futex: &AtomicU32) {
     let futex = Futex::new(futex);
-    futex.wake(i32::MAX).is_ok()
+    let _ = futex.wake(i32::MAX);
 }
