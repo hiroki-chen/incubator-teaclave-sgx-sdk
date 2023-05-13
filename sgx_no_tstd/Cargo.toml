@@ -31,7 +31,8 @@ name = "sgx_no_tstd"
 crate-type = ["rlib", "staticlib"]
 
 [features]
-default = []
+default = ["use_sgx_alloc"]
+use_sgx_alloc = []
 
 [target.'cfg(not(target_vendor = "teaclave"))'.dependencies]
 sgx_alloc = { path = "../sgx_alloc" }
