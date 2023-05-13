@@ -34,7 +34,7 @@ use sgx_trts::error;
 pub use alloc_crate::alloc::*;
 pub use sgx_alloc::System;
 
-#[cfg(feature = "use_sgx_alloc")]
+#[cfg(not(feature = "edmm"))]
 #[global_allocator]
 static ALLOC: sgx_alloc::System = sgx_alloc::System;
 
